@@ -9,7 +9,7 @@ const FeaturedJobs = () => {
       .then((data) => setJobs(data));
   }, []);
   return (
-    <div>
+    <div className="">
       <div className="text-center">
         <h2 className="text-4xl font-semibold">Featured Jobs</h2>
         <p>
@@ -17,7 +17,7 @@ const FeaturedJobs = () => {
           need. Its your future
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 m-3">
         {jobs.map((job) => (
           <Job key={job.id} job={job}></Job>
         ))}
