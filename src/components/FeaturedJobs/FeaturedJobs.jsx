@@ -24,7 +24,7 @@ const FeaturedJobs = () => {
         ))}
       </div>
       <div className="flex items-center justify-center">
-        <div className={dataLength === jobs.length && "hidden"}>
+        <div className={dataLength === jobs.length ? "hidden" : "flex"}>
           <button
             onClick={() => setDataLength(jobs.length)}
             className="bg-[#7E90FE] hover:bg-[#8a97eb] text-white py-3 px-6 text-base font-semibold rounded-md mt-2"

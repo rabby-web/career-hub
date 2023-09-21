@@ -1,5 +1,6 @@
 import mony from "../../assets/icons/money.png";
 import location2 from "../../assets/icons/location2.png";
+import { Link } from "react-router-dom";
 const Job = ({ job }) => {
   const {
     logo,
@@ -9,6 +10,7 @@ const Job = ({ job }) => {
     job_type,
     salary,
     location,
+    id,
   } = job;
   return (
     <div className="border p-5 rounded">
@@ -35,9 +37,11 @@ const Job = ({ job }) => {
           </div>
         </div>
       </div>
-      <button className="bg-[#7E90FE] hover:bg-[#8a97eb] text-white py-3 px-6 text-base font-semibold rounded-md mt-2">
-        View Details
-      </button>
+      <Link to={`/job/${id}`}>
+        <button className="bg-[#7E90FE] hover:bg-[#8a97eb] text-white py-3 px-6 text-base font-semibold rounded-md mt-2">
+          View Details
+        </button>
+      </Link>
     </div>
   );
 };
