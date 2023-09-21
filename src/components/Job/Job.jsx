@@ -35,7 +35,7 @@ const Job = ({ job }) => {
           </div>
         </div>
       </div>
-      <button className="bg-[#7E90FE] text-white py-3 px-6 text-base font-semibold rounded-md mt-2">
+      <button className="bg-[#7E90FE] hover:bg-[#8a97eb] text-white py-3 px-6 text-base font-semibold rounded-md mt-2">
         View Details
       </button>
     </div>

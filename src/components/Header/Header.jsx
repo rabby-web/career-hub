@@ -3,23 +3,23 @@ import { NavLink } from "react-router-dom";
 const Header = () => {
   const links = (
     <>
-      <li>
+      <li className="text-xl">
         <NavLink to="/">Home</NavLink>
       </li>
-      <li>
+      <li className="text-xl">
         <NavLink to="/jobs">Jobs</NavLink>
       </li>
-      <li>
+      <li className="text-xl">
         <NavLink to="/applied">Applied Jobs</NavLink>
       </li>
-      <li>
+      <li className="text-xl">
         <NavLink to="/blogs">Blogs</NavLink>
       </li>
     </>
   );
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 lg:px-7">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -40,18 +40,22 @@ const Header = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2  shadow bg-base-100 rounded-box w-52"
           >
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+        <a className="btn btn-ghost normal-case text-2xl font-semibold">
+          CareerHub
+        </a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <button className="bg-[#7E90FE] hover:bg-[#8a97eb] text-white py-3 px-6 text-base font-semibold rounded-md mt-2">
+          Star Applying
+        </button>
       </div>
     </div>
   );
