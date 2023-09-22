@@ -6,7 +6,7 @@ const Root = () => {
   return (
     <div>
       <Header></Header>
-      <div className="container mx-auto">
+      <div className="container mx-auto py-3">
         <Outlet></Outlet>
       </div>
       <Footer></Footer>
