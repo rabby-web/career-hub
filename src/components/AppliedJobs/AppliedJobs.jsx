@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { getStoredJobApplication } from "../../utility/localstorage";
 import JobApply from "../JobApply/JobApply";
+import { Helmet } from "react-helmet";
 
 const AppliedJobs = () => {
   const jobs = useLoaderData();
@@ -40,6 +41,9 @@ const AppliedJobs = () => {
   }, [jobs]);
   return (
     <div>
+      <Helmet>
+        <title>Career hub || Applied Jobs</title>
+      </Helmet>
       <div className="flex justify-around">
         <details className="dropdown mb-32">
           <summary className="m-1 btn">Filter</summary>

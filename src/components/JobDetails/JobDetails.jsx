@@ -7,6 +7,7 @@ import mail from "../../assets/icons/email.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { saveJobApplication } from "../../utility/localstorage";
+import { Helmet } from "react-helmet";
 
 const JobDetails = () => {
   const jobs = useLoaderData();
@@ -20,6 +21,9 @@ const JobDetails = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Career Hub || Job Details</title>
+      </Helmet>
       <h2 className="text-center text-3xl font-semibold m-2 p-3">
         Job Details
       </h2>

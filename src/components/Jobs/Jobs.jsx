@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Job from "../Job/Job";
+import { Helmet } from "react-helmet";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -10,7 +11,10 @@ const Jobs = () => {
       .then((data) => setJobs(data));
   }, []);
   return (
-    <div className="">
+    <div>
+      <Helmet>
+        <title>Career Hub || Jobs</title>
+      </Helmet>
       <div className="text-center">
         <h2 className="text-4xl font-semibold">Featured Jobs</h2>
         <p>
