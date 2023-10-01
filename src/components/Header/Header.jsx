@@ -1,6 +1,19 @@
-import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthProvider";
+import auth from "../../firebase/firebase.config";
 
 const Header = () => {
+  const { logOutUser, user } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOutUser(auth)
+      .then((result) => {
+        console.log("success", result);
+      })
+      .then((error) => {
+        console.error(error);
+      });
+  };
   const links = (
     <>
       <li className="text-xl">
@@ -58,11 +71,16 @@ const Header = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        <NavLink to="/applied">
-          <button className="bg-[#4a5fe9] hover:bg-[#374394] text-white py-3 px-3 md:px-6 text-base font-semibold rounded-md mt-2">
-            Star Applying
-          </button>
-        </NavLink>
+        {user ? (
+          <>
+            <span>{user.email}</span>
+            <button onClick={handleLogOut} className="btn btn-xs">
+              Sign Out
+            </button>
+          </>
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
       </div>
     </div>
   );
