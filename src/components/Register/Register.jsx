@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { AuthContext } from "../../provider/AuthProvider";
+import { Link } from "react-router-dom";
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
   const [isShow, setIsShow] = useState(false);
   //handleRegister
   const handleRegister = (e) => {
@@ -10,6 +13,13 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log(name, email, password);
+    createUser(email, password)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
   return (
     <div>
@@ -102,18 +112,20 @@ const Register = () => {
               </div>
               <button
                 type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center"
+                className="w-full bg-slate-700 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center"
               >
-                Login
+                Register
               </button>
               <p className="text-sm font-light text-gray-900">
                 Don’t have an account yet?{" "}
-                <a
-                  href="#"
-                  className="font-medium text-primary-600 hover:underline "
-                >
-                  Sign up
-                </a>
+                <Link to="/login">
+                  <a
+                    href="#"
+                    className="font-medium text-primary-600 hover:underline "
+                  >
+                    Login
+                  </a>
+                </Link>
               </p>
             </form>
           </div>
