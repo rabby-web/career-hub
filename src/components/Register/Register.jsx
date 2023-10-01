@@ -3,6 +3,11 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { AuthContext } from "../../provider/AuthProvider";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
+import {
+  sendEmailVerification,
+  updatePhoneNumber,
+  updateProfile,
+} from "firebase/auth";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
@@ -37,6 +42,19 @@ const Register = () => {
         console.log(result.user);
         e.target.reset();
         setSuccess("User create successfully");
+        // update profile
+        updateProfile(result.user, {
+          displayName: name,
+          photoURL: "https://example.com/jane-q-user/profile.jpg",
+        }).catch((error) => console.error(error));
+        // send verification email
+        sendEmailVerification(result.user).then(() => {
+          swal(
+            "Check Email!",
+            "Please Check Your Email and Verify Your Account!"
+          );
+        });
+
         swal({
           title: "Success",
           text: "Registration Successfully",

@@ -26,12 +26,21 @@ const Login = () => {
         e.target.reset();
         navigate("/applied");
         setSuccess("Successfully Login Your Account");
-        swal({
-          title: "Success",
-          text: "Successfully Login Your Account",
-          icon: "success",
-          button: "Login Now",
-        });
+        if (result.user.emailVerified) {
+          swal({
+            title: "Success",
+            text: "Successfully Login Your Account",
+            icon: "success",
+            button: "Login Now",
+          });
+        } else {
+          swal({
+            title: "Please Verify",
+            text: "Check Your Email And Verify Your Account",
+            icon: "error",
+            button: "Login Now",
+          });
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -52,7 +61,8 @@ const Login = () => {
     // send validation email
     sendPasswordResetEmail(auth, email)
       .then((result) => {
-        console.log(result);
+        console.log(result.user);
+
         swal({
           title: "Success",
           text: "Please Check Your Email",
