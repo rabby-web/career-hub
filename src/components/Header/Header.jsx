@@ -39,6 +39,11 @@ const Header = () => {
       <li className="text-xl py-2 md:py-0">
         <NavLink to="/register">Register</NavLink>
       </li>
+      {user && (
+        <li className="text-xl py-2 md:py-0">
+          <NavLink to="/profile">Profile</NavLink>
+        </li>
+      )}
     </>
   );
 
