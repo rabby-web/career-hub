@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const [isShow, setIsShow] = useState(false);
@@ -8,7 +9,7 @@ const Login = () => {
         <div className="w-full bg-slate-500 border border-slate-300 rounded-lg  md:mt-0 sm:max-w-md xl:p-0  ">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-              Sign in to your account
+              Login to your account
             </h1>
             <form className="space-y-4 md:space-y-6">
               <div>
@@ -16,14 +17,14 @@ const Login = () => {
                   htmlFor="email"
                   className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  Your email
+                  Email
                 </label>
                 <input
                   type="email"
                   name="email"
                   id="email"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                  placeholder="name@company.com"
+                  placeholder="Email"
                   required=""
                 />
               </div>
@@ -34,15 +35,22 @@ const Login = () => {
                 >
                   Password
                 </label>
-                <input
-                  type={isShow ? "text" : "password"}
-                  name="password"
-                  id="password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg  block w-full p-2.5  "
-                  required=""
-                />
-                <span onClick={() => setIsShow(!isShow)}>Show</span>
+                <div className="relative flex items-center">
+                  <input
+                    type={isShow ? "text" : "password"}
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg  block w-full p-2.5  "
+                    required=""
+                  />
+                  <span
+                    className="top-0 -ms-7"
+                    onClick={() => setIsShow(!isShow)}
+                  >
+                    {isShow ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}
+                  </span>
+                </div>
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-start">
@@ -70,9 +78,9 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center"
               >
-                Sign in
+                Login
               </button>
               <p className="text-sm font-light text-gray-900">
                 Don’t have an account yet?{" "}
