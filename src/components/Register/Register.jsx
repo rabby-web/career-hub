@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 const Register = () => {
   const { createUser } = useContext(AuthContext);
   const [isShow, setIsShow] = useState(false);
+  const [registerError, setRegisterError] = useState("");
+  const [success, setSuccess] = useState("");
   //handleRegister
   const handleRegister = (e) => {
     e.preventDefault();
@@ -13,13 +15,27 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log(name, email, password);
+    // password validation
+    if (password.length < 6) {
+      setRegisterError("password should be at least 6 characters or longer");
+      return;
+    } else if (!/[A-Z]/.test(password)) {
+      setRegisterError("Your Password should have at least one Uppercase");
+      return;
+    }
+    // rest error
+    setRegisterError("");
+    setSuccess("");
+    // create user
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
         e.target.reset();
+        setSuccess("User create successfully");
       })
       .catch((error) => {
         console.error(error);
+        setRegisterError(error.message);
       });
   };
   return (
@@ -44,7 +60,7 @@ const Register = () => {
                   id="text"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                   placeholder="Name"
-                  required=""
+                  required
                 />
               </div>
               <div>
@@ -60,7 +76,7 @@ const Register = () => {
                   id="email"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                   placeholder="Email"
-                  required=""
+                  required
                 />
               </div>
               <div>
@@ -128,6 +144,18 @@ const Register = () => {
                   </a>
                 </Link>
               </p>
+              <div className="text-center">
+                {registerError && (
+                  <div>
+                    <p className="text-red-600 font-bold">{registerError}</p>
+                  </div>
+                )}
+                {success && (
+                  <div className="text-blue-600 font-bold">
+                    <p>{success}</p>
+                  </div>
+                )}
+              </div>
             </form>
           </div>
         </div>
