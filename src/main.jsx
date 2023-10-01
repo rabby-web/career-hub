@@ -10,6 +10,8 @@ import JobDetails from "./components/JobDetails/JobDetails";
 import Blog from "./components/Blog/Blog";
 import Jobs from "./components/Jobs/Jobs";
 import { HelmetProvider } from "react-helmet-async";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +40,14 @@ const router = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blog></Blog>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
       },
     ],
   },

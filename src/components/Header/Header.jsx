@@ -15,6 +15,12 @@ const Header = () => {
       <li className="text-xl">
         <NavLink to="/blogs">Blogs</NavLink>
       </li>
+      <li className="text-xl">
+        <NavLink to="/login">Login</NavLink>
+      </li>
+      <li className="text-xl">
+        <NavLink to="/register">Register</NavLink>
+      </li>
     </>
   );
 
