@@ -1,8 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import swal from "sweetalert";
+import { sendPasswordResetEmail } from "firebase/auth";
+import auth from "../../firebase/firebase.config";
 
 const Login = () => {
   const { signInUser } = useContext(AuthContext);
@@ -11,6 +13,7 @@ const Login = () => {
   const [isShow, setIsShow] = useState(false);
   const [registerError, setRegisterError] = useState("");
   const [success, setSuccess] = useState("");
+  const emailRef = useRef(null);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -35,6 +38,32 @@ const Login = () => {
         setRegisterError(error.message);
       });
   };
+  const handleForgetPassword = () => {
+    const email = emailRef.current.value;
+    if (!email) {
+      console.log("Please give me current email", emailRef.current.value);
+      return;
+    } else if (
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)
+    ) {
+      console.log("please give me a valid email");
+      return;
+    }
+    // send validation email
+    sendPasswordResetEmail(auth, email)
+      .then((result) => {
+        console.log(result);
+        swal({
+          title: "Success",
+          text: "Please Check Your Email",
+          icon: "success",
+          button: "Email",
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   return (
     <div>
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -53,6 +82,7 @@ const Login = () => {
                 </label>
                 <input
                   type="email"
+                  ref={emailRef}
                   name="email"
                   id="email"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
@@ -102,6 +132,7 @@ const Login = () => {
                   </div>
                 </div>
                 <a
+                  onClick={handleForgetPassword}
                   href="#"
                   className="text-sm font-medium text-primary-600 hover:underline "
                 >
