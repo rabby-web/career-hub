@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { AuthContext } from "../../provider/AuthProvider";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
@@ -14,13 +15,17 @@ const Register = () => {
     const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(name, email, password);
+    const accepted = e.target.terms.checked;
+    console.log(name, email, password, accepted);
     // password validation
     if (password.length < 6) {
       setRegisterError("password should be at least 6 characters or longer");
       return;
     } else if (!/[A-Z]/.test(password)) {
       setRegisterError("Your Password should have at least one Uppercase");
+      return;
+    } else if (!accepted) {
+      setRegisterError("Please accept our terms and condition");
       return;
     }
     // rest error
@@ -32,6 +37,12 @@ const Register = () => {
         console.log(result.user);
         e.target.reset();
         setSuccess("User create successfully");
+        swal({
+          title: "Success",
+          text: "Registration Successfully",
+          icon: "success",
+          button: "Register Complete",
+        });
       })
       .catch((error) => {
         console.error(error);
@@ -108,6 +119,7 @@ const Register = () => {
                   <div className="flex items-center h-5">
                     <input
                       id="remember"
+                      name="terms"
                       aria-describedby="remember"
                       type="checkbox"
                       className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300  "

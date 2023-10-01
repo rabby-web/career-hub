@@ -2,12 +2,16 @@ import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
+import swal from "sweetalert";
 
 const Login = () => {
   const { signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [isShow, setIsShow] = useState(false);
+  const [registerError, setRegisterError] = useState("");
+  const [success, setSuccess] = useState("");
+
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -18,9 +22,17 @@ const Login = () => {
         console.log(result.user);
         e.target.reset();
         navigate("/applied");
+        setSuccess("Successfully Login Your Account");
+        swal({
+          title: "Success",
+          text: "Successfully Login Your Account",
+          icon: "success",
+          button: "Login Now",
+        });
       })
       .catch((error) => {
         console.error(error);
+        setRegisterError(error.message);
       });
   };
   return (
@@ -113,6 +125,18 @@ const Login = () => {
                   </a>
                 </Link>
               </p>
+              <div className="text-center">
+                {registerError && (
+                  <div>
+                    <p className="text-red-600 font-bold">{registerError}</p>
+                  </div>
+                )}
+                {success && (
+                  <div className="text-blue-600 font-bold">
+                    <p>{success}</p>
+                  </div>
+                )}
+              </div>
             </form>
           </div>
         </div>
