@@ -13,6 +13,7 @@ import { HelmetProvider } from "react-helmet-async";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import AuthProvider from "./provider/AuthProvider";
+import PrivateRoutes from "./routes/PrivateRoutes";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/applied",
-        element: <AppliedJobs></AppliedJobs>,
+        element: (
+          <PrivateRoutes>
+            <AppliedJobs></AppliedJobs>
+          </PrivateRoutes>
+        ),
         loader: () => fetch("../jobs.json"),
       },
       {

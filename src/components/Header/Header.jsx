@@ -16,22 +16,27 @@ const Header = () => {
   };
   const links = (
     <>
-      <li className="text-xl">
+      <li className="text-xl py-2 md:py-0">
         <NavLink to="/">Home</NavLink>
       </li>
-      <li className="text-xl">
+      <li className="text-xl py-2 md:py-0">
         <NavLink to="/jobs">Jobs</NavLink>
       </li>
-      <li className="text-xl">
+      {/* {user && (
+        <li className="text-xl py-2 md:py-0">
+          <NavLink to="/applied">Applied Jobs</NavLink>
+        </li>
+      )} */}
+      <li className="text-xl py-2 md:py-0">
         <NavLink to="/applied">Applied Jobs</NavLink>
       </li>
-      <li className="text-xl">
+      <li className="text-xl py-2 md:py-0">
         <NavLink to="/blogs">Blogs</NavLink>
       </li>
-      <li className="text-xl">
+      <li className="text-xl py-2 md:py-0">
         <NavLink to="/login">Login</NavLink>
       </li>
-      <li className="text-xl">
+      <li className="text-xl py-2 md:py-0">
         <NavLink to="/register">Register</NavLink>
       </li>
     </>
@@ -71,7 +76,7 @@ const Header = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        {user ? (
+        {/* {user ? (
           <>
             <span>{user.email}</span>
             <button onClick={handleLogOut} className="btn btn-xs">
@@ -80,7 +85,48 @@ const Header = () => {
           </>
         ) : (
           <Link to="/login">Login</Link>
-        )}
+        )} */}
+        <div className="dropdown dropdown-end">
+          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+            <div className="w-10 rounded-full">
+              <img src="https://i.ibb.co/ZGHH5Qk/user-3177440.png" />
+            </div>
+          </label>
+          <ul
+            tabIndex={0}
+            className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-72"
+          >
+            <li>
+              <a className="justify-between">
+                Profile
+                <span className="badge">New</span>
+              </a>
+            </li>
+            <li>
+              <a>Settings</a>
+            </li>
+            <li>
+              {user ? (
+                <>
+                  <span>{user.email}</span>
+                  <button
+                    onClick={handleLogOut}
+                    className="btn btn-sm bg-slate-700 text-white py-2"
+                  >
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <Link
+                  className="btn btn-sm bg-slate-700 text-white py-2"
+                  to="/login"
+                >
+                  Login
+                </Link>
+              )}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );
